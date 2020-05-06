@@ -9,20 +9,24 @@ navLinks.forEach(link => link.addEventListener('click', preventD))
 
 
 
-// click on nav-link -- change  nav link text
+// click -- on nav-link -- change  nav link text
 const changeLink = e => e.target.textContent = 'changed';
 navLinks.forEach(link => link.addEventListener('click', changeLink)); 
 
-// mouseover on header -- change header background 
+// mouseover -- on header -- change header background 
 const header = document.querySelector('header')
 const changeBC = () => (header.style.backgroundColor = "#D1826F");
 header.addEventListener('mouseover', changeBC);
 
-// mouseout on header-- change header background back 
-const revertBC = () => (header.style.backgroundColor = 'white');
+// mouseout -- on header -- change header background back 
+const revertBC = () => {
+    if (document.fullscreen) {
+        header.style.backgroundColor = "grey";
+    } else header.style.backgroundColor = 'white';
+}
 header.addEventListener('mouseout', revertBC);
 
-// dblclick on btn-- alert 'email has been sent'
+// dblclick -- on btn-- alert 'email has been sent'
 const btns = document.querySelectorAll('.btn'); 
 const alertEmail = (e) => {
     alert('check your email for details on signing up!')
@@ -60,7 +64,7 @@ document.addEventListener("fullscreenchange", () => {
     } else {
                 document.body.style.backgroundColor = "white";
                 document.body.style.color = "black";
-                header.style.backgroundColor = "white"; 
+                header.style.backgroundColor = "grey"; 
     }
 });
 
@@ -72,9 +76,17 @@ document.addEventListener('keydown', e => {
 })
 
 
-// focus
+// resize -- make intro img opacity 0.5 for 1 second
+const introImg = document.querySelector('.intro img')
+window.addEventListener('resize', () => {
+    introImg.style.opacity = 0.5; 
+    setTimeout(function () {
+        introImg.style.opacity = 1; 
+    }, 1000); 
+})
 
+// dragstart -- create red border around item when dragging 
+document.addEventListener("dragstart", (e) => e.target.style.border = '5px solid red');
 
-
-
-
+// dragend -- remove border when done dragging
+document.addEventListener("dragend", (e) => e.target.style.border = "none");
